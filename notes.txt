@@ -1,0 +1,9 @@
+gitBack
+|-User Interface
+| `-command line
+|-git Interface
+| `-custom
+`-filesystem interface
+  `-Probably just os.system
+
+config file goes in %USERPROFILE%\AppData\Roaming\gitBack

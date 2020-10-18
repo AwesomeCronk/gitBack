@@ -1,0 +1,25 @@
+
+About:
+    gitBack is a git-based backup system written by Clayton Cronk. Source can be found at https://github.com/AwesomeCronk/gitBack
+
+Requirements:
+    An installation of Git on the system path. https://git-scm.org
+    Python 3+.
+
+Syntax:
+    gitBack [--list] [--include <directory to include> <remote for directory>] [--exclude <directory to exclude>] [--backup] [--recover]
+
+--list
+    Lists all of the directories that are going to be backed up and the remote repository to which they will be matched.
+
+--include <directory to include> [remote for directory]
+    Adds a directory to the backup list.
+
+--exclude <directory to exclude>
+    Removes a directory from the backup list.
+
+--backup
+    Iterates through the backup list. For each directory untracked files are added and a commit is made. The new commit is then pushed to that directory's remote repository
+
+--recover
+    Iterates through the backup list. For each directory the remote is cloned in. DOES NOT REBUILD THE PATH TO ANY DIRECTORY! YOU MUST DO THIS YOURSELF! You will need to manually clone the settings file from where it is backed up to C:\Users\username\AppData\Roaming\gitbackSettings
