@@ -1,17 +1,29 @@
-import sys
+import sys, os
 import subprocess as sp
+
+def _parseRepos():   #Read repositories.cfg and return a list of tuples containing the local path and remote location
+    repos = {}
+    with open('{}/gitBackConfig/repositories.cfg'.format(os.environ['USERPROFILE']), 'r') as repoFile:
+        for line in repoFile.readlines():
+            repos.update({line.split(' ||| ')[0]: line.split(' ||| ')[1]})
+    return repos
+
+def _saveRepos(repos):
+    with open('{}/gitBackConfig/repositories.cfg'.format(os.environ['USERPROFILE']), 'w') as repoFile:
+        for localRepo in list(repos.keys()) #write the key, a ' ||| ', and the value, then a newline
 
 def usage():     #print out usage
     with open('usage.txt', 'r') as file:
         print(file.read())
 
 def list():     #print out the list
-    pass
+    repos = _parseRepos()
 
-def include(newDir, newDirBackup = None):  #add a new directory to the list
-    pass
+def include(newRepo, newRepoBackup = None):  #add a new directory to the list
+    repos = _parseRepos()
+    repos.update({os.path.expandvars(newRepo): os.path.expandvars(newRepoBackup)})
 
-def exclude(excDir):  #remove a directory from the list
+def exclude(excRepo):  #remove a directory from the list
     pass
 
 def backup():   #Back up all of the listed directories
@@ -20,7 +32,9 @@ def backup():   #Back up all of the listed directories
     
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        if sys.argv[1] == '--list':
+        if sys.argv[1] == '--help':
+            usage()
+        elif sys.argv[1] == '--list':
             list()
         elif sys.argv[1] == '--include':
             if len(sys.argv) == 3:
