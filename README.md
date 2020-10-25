@@ -1,4 +1,3 @@
 This is meant to be a simple backup systyem for Windows that loops over all the directories listed in its config file and automatically runs git add, git commit, and git push to update remote repositories to match each local one.
 
-WARNING! Multiple branches may break this system!
-WARNING! There are no chacks for validity on ANYTHING! gitBack kinda relies on you to make sure you give it valid paths for everything.
+A few warnings: Multiple branches may break this system! There are no chacks for validity on ANYTHING! gitBack kinda relies on you to make sure you give it valid paths for everything. Multiple instances of the same local repo will break the config file! This program was written to work on my system, with no regards to how other people have their systems set up. It may break things on your system.

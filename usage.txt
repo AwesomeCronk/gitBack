@@ -25,4 +25,4 @@ Syntax:
     Iterates through the backup list. For each repository untracked files are added and a commit is made. The new commit is then pushed to that repository's remote repository
 
 --recover
-    Iterates through the backup list. For each repository the remote is cloned in. DOES NOT REBUILD THE PATH TO ANY REPOSITORY! YOU MUST DO THIS YOURSELF! You will need to manually clone the settings file from where it is backed up to C:\Users\username\AppData\Roaming\gitbackSettings
+    Iterates through the backup list. For each repository the remote is cloned in. DOES NOT REBUILD THE PATH TO ANY REPOSITORY! YOU MUST DO THIS YOURSELF! You will need to manually recover C:\Users\username\AppData\Roaming\gitBackConfig.

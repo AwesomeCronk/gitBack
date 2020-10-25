@@ -9,13 +9,14 @@ def _parseRepos():   #Read repositories.cfg and return a dictionary containing t
     repos = {}
     with open('{}/gitBackConfig/repositories.cfg'.format(os.environ['APPDATA']), 'r') as repoFile:
         for line in repoFile.readlines():
-            repos.update({line.split(' ||| ')[0]: line.split(' ||| ')[1]})
+            print(line.__repr__(), end = '\n\n')
+            repos.update({line[0:-1].split(' ||| ')[0]: line[0:-1].split(' ||| ')[1]})  #Use line[0:-1] to pull the \n off the end of line.
     return repos
 
-def _saveRepos(repos):  #Write the 
+def _saveRepos(repos):  #Write to repositories.cfg to save the repos dictionary.
     with open('{}/gitBackConfig/repositories.cfg'.format(os.environ['APPDATA']), 'w') as repoFile:
         for localRepo in list(repos.keys()):
-            repoFile.writelines('{} ||| {}'.format(localRepo, repos[localRepo]))
+            repoFile.write('{} ||| {}\n'.format(localRepo, repos[localRepo]))
 
 def usage():     #print out usage
     with open('usage.txt', 'r') as file:
