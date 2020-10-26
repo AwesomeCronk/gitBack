@@ -7,22 +7,22 @@ Requirements:
     Python 3+.
 
 Syntax:
-    gitBack [--help] [--list] [--include <repository to include> <remote for repository>] [--exclude <repository to exclude>] [--backup] [--recover]
+    gitBack [help | list | include <repository> <remote> | exclude <repository> | backup | recover]
 
---help
+help
     Displays this help message.
 
---list
+list
     Lists all of the repositories that are going to be backed up and the remote repository to which they will be matched.
 
---include <repository to include> [remote for repository]
-    Adds a repository to the backup list.
+include <repository> <remote>
+    Adds a repository to the backup list. <repository> is the path to the local repository and <remote> is the name of the git remote to back up to.
 
---exclude <repository to exclude>
+exclude <repository>
     Removes a repository from the backup list.
 
---backup
-    Iterates through the backup list. For each repository untracked files are added and a commit is made. The new commit is then pushed to that repository's remote repository
+backup
+    Iterates through the backup list. For each repository untracked files are added and a commit is made and pushed.
 
---recover
+recover
     Iterates through the backup list. For each repository the remote is cloned in. DOES NOT REBUILD THE PATH TO ANY REPOSITORY! YOU MUST DO THIS YOURSELF! You will need to manually recover C:\Users\username\AppData\Roaming\gitBackConfig.
