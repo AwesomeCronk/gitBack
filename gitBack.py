@@ -22,7 +22,7 @@ def _git(command):  #Wrapper for subprocess to facilitate one-line git commands.
     return git.communicate()
 
 def usage():     #print out usage
-    with open('usage.txt', 'r') as file:
+    with open('{}/gitBackConfig/usage.txt'.format(os.environ['APPDATA'], 'r') as file:
         print(file.read())
 
 def listRepos():     #print out the list
@@ -49,15 +49,18 @@ def excludeRepo(excRepo):  #remove a directory from the list
 def backup():   #Back up all of the listed directories
     repos = _loadRepos()
     for localRepo in repos.keys():
-        print('cd to {}'.format(localRepo))
+        print('Checking directory {}'.format(localRepo))
+        os.chdir(localRepo)
 
         gitResults = _git('status')
         if gitResults != (b'On branch master\nnothing to commit, working tree clean\n', b''):
             print('Changes needing committed.')
 
-            print('git add .')
-            print('git commit -m "gitBack autocommit on <date> at <time>"')
-        print('git push {} master'.format(repos[localRepo]))
+            _git('add .')
+            _git('commit -m "gitBack autocommit on {} at {}"'.format())
+        print('No changes needing commited.')
+        print('Pushing to remote.', end = '\n\n')
+        _git('push {} master'.format(repos[localRepo]))
     
 if __name__ == '__main__':
     if len(sys.argv) > 1:
