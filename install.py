@@ -24,9 +24,11 @@ os.mkdir(installDir)
 
 #copy the necessary files to installDir
 for file in configFiles:
-    print('Copying {} to {}'.format(file, configDir))
-    print(shutil.copyfile(file, configDir))
+    print('Copying {} to {} ... '.format(file, configDir), end = '')
+    shutil.copy(file, configDir)
+    print('Done.')
 
 for file in installFiles:
-    print('Copying {} to {}'.format(file, installDir))
-    print(shutil.copyfile(file, installDir))
+    print('Copying {} to {} ... '.format(file, installDir), end = '')
+    shutil.copy(file, installDir)
+    print('Done.')

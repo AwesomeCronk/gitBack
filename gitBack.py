@@ -22,7 +22,7 @@ def _git(command):  #Wrapper for subprocess to facilitate one-line git commands.
     return git.communicate()
 
 def usage():     #print out usage
-    with open('{}/gitBackConfig/usage.txt'.format(os.environ['APPDATA'], 'r') as file:
+    with open('{}/gitBackConfig/usage.txt'.format(os.environ['APPDATA'], 'r')) as file:
         print(file.read())
 
 def listRepos():     #print out the list
