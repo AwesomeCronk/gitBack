@@ -4,7 +4,7 @@ configDir = os.path.expandvars('%APPDATA%\\gitBackConfig')
 installDir = os.path.expandvars('%LOCALAPPDATA%\\Programs\\gitBack')
 downloadDir = os.path.dirname(os.path.realpath(__file__))
 configFiles = ['usage.txt']
-installFiles = ['LICENSE', 'README.md']
+installFiles = ['LICENSE', 'README.md', 'gitBack.exe']
 
 #Check if configDir exists
 #If not, create it and repositories.cfg
