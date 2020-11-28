@@ -1,7 +1,7 @@
-import sys, os
+import sys, os, datetime
 import subprocess as sp
 
-#Notes for next time:
+today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
 
 #Local and remote repos are separated in repositories.cfg by ' ||| '. This makes it easier to read manually and debug issues with the config file.
 def _loadRepos():   #Read repositories.cfg and return a dictionary containing the local and remote repositories. Local repos are keys.
@@ -53,13 +53,15 @@ def backup():   #Back up all of the listed directories
         os.chdir(localRepo)
 
         gitResults = _git('status')
-        if gitResults != (b'On branch master\nnothing to commit, working tree clean\n', b''):
+        print(gitResults.__repr__())
+        if 'Changes not staged for commit:' in gitResults[0]:   #Check for uncommitted changes
             print('Changes needing committed.')
-
             _git('add .')
-            _git('commit -m "gitBack autocommit on {} at {}"'.format())
-        print('No changes needing commited.')
-        print('Pushing to remote.', end = '\n\n')
+            _git('commit -m "gitBack autocommit on {} at {}"'.format(today, now))
+        else:
+            print('No changes needing commited.')
+            
+        print('Pushing to remote.', end = '\n\n')   #Push the current state to the remote repository
         _git('push {} master'.format(repos[localRepo]))
     
 if __name__ == '__main__':

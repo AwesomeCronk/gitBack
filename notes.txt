@@ -7,3 +7,7 @@ gitBack
   `-Probably just os.system
 
 config file goes in %USERPROFILE%\AppData\Roaming\gitBack
+
+Roadmap:
+- Add support for local file paths.
+- Error checking.
