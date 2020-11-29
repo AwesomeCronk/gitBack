@@ -7,28 +7,39 @@ configFiles = ['usage.txt']
 installFiles = ['LICENSE', 'README.md', 'gitBack.exe']
 
 #Check if configDir exists
-#If not, create it and repositories.cfg
-if not os.path.exists(configDir):
-    print('Creating config directory.')
-    os.mkdir(configDir)
+import sys
 
-#Check if %LOCALAPPDATA%\Programs\gitBack exists
-#if so, delete it
-if os.path.exists(installDir):
-    print('Removing install directory.')
-    shutil.rmtree(installDir)
+_version = '1.0.0'
 
-#Create installDir
-print('Creating install directory.')
-os.mkdir(installDir)
+def version():
+    print('Using gitBack installer version {}.'.format(_version))
 
-#copy the necessary files to installDir
-for file in configFiles:
-    print('Copying {} to {} ... '.format(file, configDir), end = '')
-    shutil.copy(file, configDir)
-    print('Done.')
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'version':
+        version()
+else:
+    #If not, create it and repositories.cfg
+    if not os.path.exists(configDir):
+        print('Creating config directory.')
+        os.mkdir(configDir)
 
-for file in installFiles:
-    print('Copying {} to {} ... '.format(file, installDir), end = '')
-    shutil.copy(file, installDir)
-    print('Done.')
+    #Check if %LOCALAPPDATA%\Programs\gitBack exists
+    #if so, delete it
+    if os.path.exists(installDir):
+        print('Removing install directory.')
+        shutil.rmtree(installDir)
+
+    #Create installDir
+    print('Creating install directory.')
+    os.mkdir(installDir)
+
+    #copy the necessary files to installDir
+    for file in configFiles:
+        print('Copying {} to {} ... '.format(file, configDir), end = '')
+        shutil.copy(file, configDir)
+        print('Done.')
+
+    for file in installFiles:
+        print('Copying {} to {} ... '.format(file, installDir), end = '')
+        shutil.copy(file, installDir)
+        print('Done.')

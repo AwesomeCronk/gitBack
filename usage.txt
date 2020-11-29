@@ -24,5 +24,8 @@ exclude <repository>
 backup
     Iterates through the backup list. For each repository untracked files are added and a commit is made and pushed.
 
-recover
+recover -- NOT IMPLEMENTED YET
     Iterates through the backup list. For each repository the remote is cloned in. DOES NOT REBUILD THE PATH TO ANY REPOSITORY! YOU MUST DO THIS YOURSELF! You will need to manually recover C:\Users\username\AppData\Roaming\gitBackConfig. If the specified remote repository is ahead in commits, changes liekly will not be pushed.
+
+version
+    Displays the current version.

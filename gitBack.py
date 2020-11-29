@@ -2,6 +2,7 @@ import sys, os, datetime
 import subprocess as sp
 
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
+_version = '1.1.0'
 
 #Local and remote repos are separated in repositories.cfg by ' ||| '. This makes it easier to read manually and debug issues with the config file.
 def _loadRepos():   #Read repositories.cfg and return a dictionary containing the local and remote repositories. Local repos are keys.
@@ -53,17 +54,25 @@ def backup():   #Back up all of the listed directories
         os.chdir(localRepo)
 
         gitResults = _git('status')
-        print(gitResults.__repr__())
-        if 'Changes not staged for commit:' in gitResults[0]:   #Check for uncommitted changes
-            print('Changes needing committed.')
+        print(gitResults[0].decode('utf-8'))
+        print(gitResults[1].decode('utf-8'))
+        if b'Changes not staged for commit:' in gitResults[0]:   #Check for uncommitted changes
+            print('Changes needing committed. Committing now.')
             _git('add .')
-            _git('commit -m "gitBack autocommit on {} at {}"'.format(today, now))
+            gitResults = _git('commit -m "gitBack autocommit on {} at {}"'.format(today, now))
+            print(gitResults[0].decode('utf-8'))
+            print(gitResults[1].decode('utf-8'))
         else:
             print('No changes needing commited.')
             
         print('Pushing to remote.', end = '\n\n')   #Push the current state to the remote repository
-        _git('push {} master'.format(repos[localRepo]))
+        gitResults = _git('push {} master'.format(repos[localRepo]))
+        print(gitResults[0].decode('utf-8'))
+        print(gitResults[1].decode('utf-8'))
     
+def version():
+    print('Using gitBack version {}.'.format(_version))
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == 'help':
@@ -76,5 +85,7 @@ if __name__ == '__main__':
             excludeRepo(sys.argv[2])
         elif sys.argv[1] == 'backup':
             backup()
+        elif sys.argv[1] == 'version':
+            version()
     else:
         usage()
