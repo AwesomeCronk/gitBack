@@ -3,6 +3,7 @@ import subprocess as sp
 
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
 _version = '1.1.0'
+_termWidth = os.get_terminal_size()[0]
 
 #Local and remote repos are separated in repositories.cfg by ' ||| '. This makes it easier to read manually and debug issues with the config file.
 def _loadRepos():   #Read repositories.cfg and return a dictionary containing the local and remote repositories. Local repos are keys.
@@ -50,6 +51,7 @@ def excludeRepo(excRepo):  #remove a directory from the list
 def backup():   #Back up all of the listed directories
     repos = _loadRepos()
     for localRepo in repos.keys():
+        print('=' * _termWidth)
         print('Checking directory {}'.format(localRepo))
         os.chdir(localRepo)
 
@@ -65,10 +67,11 @@ def backup():   #Back up all of the listed directories
         else:
             print('No changes needing commited.')
             
-        print('Pushing to remote.', end = '\n\n')   #Push the current state to the remote repository
+        print('Pushing to remote.')   #Push the current state to the remote repository
         gitResults = _git('push {} master'.format(repos[localRepo]))
         print(gitResults[0].decode('utf-8'))
         print(gitResults[1].decode('utf-8'))
+        print('\n')
     
 def version():
     print('Using gitBack version {}.'.format(_version))
