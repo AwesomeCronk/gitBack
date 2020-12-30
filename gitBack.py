@@ -1,8 +1,11 @@
-import sys, os, datetime
+import sys, os, datetime, ctypes
 import subprocess as sp
 
+kernel32 = ctypes.windll.kernel32
+kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
-_version = '1.1.1'
+_version = '1.2.0'
 _termWidth = os.get_terminal_size()[0]
 
 #Local and remote repos are separated in repositories.cfg by ' ||| '. This makes it easier to read manually and debug issues with the config file.
