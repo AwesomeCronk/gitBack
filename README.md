@@ -2,7 +2,7 @@ This is meant to be a simple backup systyem for Windows that loops over all the 
 
 A few warnings: Multiple branches may break this system! There are no checks for validity on ANYTHING! gitBack kinda relies on you to make sure you give it valid paths for everything. Multiple instances of the same local repo will break the config file! This program was written to work on my system, with no regards to how other people have their systems set up. It may break things on your system.
 
-gitBack version: 1.2.0
+gitBack version: 1.3.0
 installer version: 1.0.1
 
 ### Installation instructions (non git users):
