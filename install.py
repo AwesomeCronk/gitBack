@@ -3,10 +3,10 @@ import os, shutil, sys
 configDir = os.path.expandvars('%APPDATA%\\gitBackConfig')
 installDir = os.path.expandvars('%LOCALAPPDATA%\\Programs\\gitBack')
 downloadDir = os.path.dirname(os.path.realpath(__file__))
-configFiles = ['usage.txt']
-installFiles = ['LICENSE', 'README.md', 'gitBack.exe']
+configFiles = []
+installFiles = ['LICENSE', 'README.md', 'gitBack.exe', 'usage.txt']
 
-_version = '1.0.1'
+_version = '1.1.0'
 
 def version():
     print('Using gitBack installer version {}.'.format(_version))

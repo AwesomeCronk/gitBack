@@ -5,7 +5,7 @@ kernel32 = ctypes.windll.kernel32
 kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
-_version = '1.3.0'
+_version = '1.4.0'
 _termWidth = os.get_terminal_size()[0]
 _driveLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                  'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -66,7 +66,7 @@ def _git(command):  #Wrapper for subprocess to facilitate one-line git commands.
     return git.communicate()
 
 def usage():     #print out usage
-    with open('{}/gitBackConfig/usage.txt'.format(os.environ['APPDATA'], 'r')) as file:
+    with open('{}/gitBack/usage.txt'.format(os.environ['LOCALAPPDATA'], 'r')) as file:
         print(file.read())
 
 def listRepos():     #print out the list
