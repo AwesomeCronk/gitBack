@@ -1,4 +1,4 @@
-import os, shutil
+import os, shutil, sys
 
 configDir = os.path.expandvars('%APPDATA%\\gitBackConfig')
 installDir = os.path.expandvars('%LOCALAPPDATA%\\Programs\\gitBack')
@@ -6,10 +6,7 @@ downloadDir = os.path.dirname(os.path.realpath(__file__))
 configFiles = ['usage.txt']
 installFiles = ['LICENSE', 'README.md', 'gitBack.exe']
 
-#Check if configDir exists
-import sys
-
-_version = '1.0.0'
+_version = '1.0.1'
 
 def version():
     print('Using gitBack installer version {}.'.format(_version))
@@ -18,7 +15,7 @@ if len(sys.argv) > 1:
     if sys.argv[1] == 'version':
         version()
 else:
-    #If not, create it and repositories.cfg
+    #If not, create it
     if not os.path.exists(configDir):
         print('Creating config directory.')
         os.mkdir(configDir)

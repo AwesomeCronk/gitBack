@@ -2,7 +2,7 @@ import sys, os, datetime
 import subprocess as sp
 
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
-_version = '1.1.0'
+_version = '1.1.1'
 _termWidth = os.get_terminal_size()[0]
 
 #Local and remote repos are separated in repositories.cfg by ' ||| '. This makes it easier to read manually and debug issues with the config file.
@@ -77,6 +77,15 @@ def version():
     print('Using gitBack version {}.'.format(_version))
 
 if __name__ == '__main__':
+    try:
+        tempRepoFile = open('{}/gitBackConfig/repositories.cfg'.format(os.environ['APPDATA']), 'r')
+        tempRepoFile.close()
+    except OSError:
+        print('%APPDATA%\\gitBackConfig\\repositories.cfg not found. Creating a blank one.')
+        tempRepoFile = open('{}/gitBackConfig/repositories.cfg'.format(os.environ['APPDATA']), 'w')
+        tempRepoFile.write('')
+        tempRepoFile.close()
+
     if len(sys.argv) > 1:
         if sys.argv[1] == 'help':
             usage()

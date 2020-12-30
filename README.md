@@ -20,4 +20,8 @@ A few warnings: Multiple branches may break this system! There are no checks for
 3. Execute `install.exe`.
 3. Make sure `%USERPROFILE%\AppData\Local\Programs\gitBack` is on your path.
 
+### Uninstallation/removal instructions:
+1. Delete `%APPDATA%\gitBackConfig` and its contents.
+2. Delete `%LOCALAPPDATA\Programs\gitBack` and its contents.
+
 gitBack is licensed under the MIT license with no warranty of any kind.
