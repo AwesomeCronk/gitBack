@@ -118,6 +118,8 @@ def backup():   #Back up all of the listed directories
         else:
             print('No changes needing commited.')
             
+        #Check if local is ahead, behind, or diverged
+
         print('Pushing to remote.')   #Push the current state to the remote repository
         gitResults = _git('push {} master'.format(repos[localRepo]))
         print(gitResults[0].decode('utf-8'))

@@ -2,12 +2,13 @@ gitBack
 |-User Interface
 | `-command line
 |-git Interface
-| `-custom
+| `-subprocess
 `-filesystem interface
-  `-Probably just os.system
+  `-os.path
 
-config file goes in %USERPROFILE%\AppData\Roaming\gitBack
+config file goes in %USERPROFILE%\AppData\Roaming\gitBackConfig
 
 Roadmap:
-- Add support for local file paths.
-- Error checking.
+- Add support for local file paths.    DONE
+- More error checking?
+- Conditional push, see https://stackoverflow.com/a/62616906/12170254
