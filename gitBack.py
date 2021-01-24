@@ -102,6 +102,7 @@ def excludeRepo(excRepo):  #remove a directory from the list
 def backup():   #Back up all of the listed directories
     repos = _loadRepos()
     for localRepo in repos.keys():
+        remoteRepo = repos[localRepo]
         print('=' * _termWidth)
         print('Checking directory {}'.format(localRepo))
         os.chdir(localRepo)
@@ -119,12 +120,37 @@ def backup():   #Back up all of the listed directories
             print('No changes needing commited.')
             
         #Check if local is ahead, behind, or diverged
+        mb = _git('merge-base master {}/master'.format(remoteRepo))[0]
+        rpLocal = _git('rev-parse master')[0]
+        rpRemote = _git('rev-parse {}/master'.format(remoteRepo))[0]
 
-        print('Pushing to remote.')   #Push the current state to the remote repository
-        gitResults = _git('push {} master'.format(repos[localRepo]))
-        print(gitResults[0].decode('utf-8'))
-        print(gitResults[1].decode('utf-8'))
-        print('\n')
+        print('merge-base:       {}\nrev-parse local:  {}\nrev-parse remote: {}'.format(mb[0:-1].decode('UTF-8'), rpLocal[0:-1].decode('UTF-8'), rpRemote[0:-1].decode('UTF-8')))
+
+        if mb == rpLocal == rpRemote:
+            status = 'up-to-date'
+        elif mb == rpLocal != rpRemote:
+            status = 'behind'
+        elif mb == rpRemote != rpLocal:
+            status = 'ahead'
+        elif mb !=rpRemote != rpLocal:
+            status = 'diverged'
+        else:
+            status = 'unknown'
+
+        if status == 'ahead':
+            print('Local repository is ahead of remote. Pushing to remote.')   #Push the current state to the remote repository
+            gitResults = _git('push {} master'.format(remoteRepo))
+            print(gitResults[0].decode('utf-8'))
+            print(gitResults[1].decode('utf-8'))
+            print('\n')
+        elif status == 'up-to-date':
+            print('Local repository is up-to-date with remote.')
+        elif status == 'behind':
+            print('Local repository is behind remote. Consider using git pull to update your local.')
+        elif status == 'diverged':
+            print('Local repository and remote have diverged. gitBack cannot fix this.')
+        else:
+            print('Unable to determine status of remote repository.')
     
 def version():
     print('Using gitBack version {}.'.format(_version))
