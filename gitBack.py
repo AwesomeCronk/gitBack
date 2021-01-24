@@ -5,7 +5,7 @@ kernel32 = ctypes.windll.kernel32
 kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 
 today, now = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S").split()
-_version = '1.4.0'
+_version = '1.5.0'
 _termWidth = os.get_terminal_size()[0]
 _driveLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                  'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -117,7 +117,7 @@ def backup():   #Back up all of the listed directories
             print(gitResults[0].decode('utf-8'))
             print(gitResults[1].decode('utf-8'))
         else:
-            print('No changes needing commited.')
+            print('No changes needing committed.\n')
             
         #Check if local is ahead, behind, or diverged
         mb = _git('merge-base master {}/master'.format(remoteRepo))[0]
