@@ -133,7 +133,7 @@ def backup():   #Back up all of the listed directories
             status = 'behind'
         elif mb == rpRemote != rpLocal:
             status = 'ahead'
-        elif mb !=rpRemote != rpLocal:
+        elif mb != rpRemote != rpLocal:
             status = 'diverged'
         else:
             status = 'unknown'
