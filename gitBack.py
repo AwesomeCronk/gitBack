@@ -110,7 +110,7 @@ def backup():   #Back up all of the listed directories
         gitResults = _git('status')
         print(gitResults[0].decode('utf-8'))
         print(gitResults[1].decode('utf-8'))
-        if b'Changes not staged for commit:' in gitResults[0]:   #Check for uncommitted changes
+        if not b'nothing to commit, working tree clean' in gitResults[0]:   #Check for uncommitted changes
             print('Changes needing committed. Committing now.')
             _git('add .')
             gitResults = _git('commit -m "gitBack autocommit on {} at {}"'.format(today, now))
