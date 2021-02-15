@@ -66,7 +66,7 @@ def _git(command):  #Wrapper for subprocess to facilitate one-line git commands.
     return git.communicate()
 
 def usage():     #print out usage
-    with open('{}/gitBack/usage.txt'.format(os.environ['LOCALAPPDATA'], 'r')) as file:
+    with open('{}/Programs/gitBack/usage.txt'.format(os.environ['LOCALAPPDATA'], 'r')) as file:
         print(file.read())
 
 def listRepos():     #print out the list
