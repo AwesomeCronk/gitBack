@@ -90,10 +90,10 @@ def includeRepo(newRepo, remote):  #add a new directory to the list
 def excludeRepo(excRepo):  #remove a directory from the list
     repos = _loadRepos()
     isValid, result = _parsePath(excRepo)
-    if not isValid:
-        print('Failed to remove repository from watch list. Reason: {}'.format(result))
+    # if not isValid:
+    #     print('Failed to remove repository from watch list. Reason: {}'.format(result))
     try:
-        del(repos[result])
+        del(repos[excRepo])
         _saveRepos(repos)
         print('Local repository removed from watch list.')
     except KeyError:
